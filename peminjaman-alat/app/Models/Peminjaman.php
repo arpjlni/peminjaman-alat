@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Peminjaman extends Model
+{
+    protected $table = 'peminjaman';
+    protected $fillable = ['user_id', 'alat_id', 'tgl_pinjam', 'tgl_kembali', 'status_peminjaman'];
+
+    protected $casts = [
+        'tgl_pinjam'  => 'date',
+        'tgl_kembali' => 'date',
+    ];
+
+    public function user()         { return $this->belongsTo(User::class); }
+    public function alat()         { return $this->belongsTo(Alat::class); }
+    public function pengembalian() { return $this->hasOne(Pengembalian::class); }
+}
